@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #ffffff;
+            padding: 10px 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header .left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #1877f2;
+        }
+        .header .search-panel {
+            display: flex;
+            align-items: center;
+        }
+        .header .search-panel input {
+            width: 200px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .header .search-panel button {
+            background-color: #1877f2;
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .header .search-panel button:hover {
+            background-color: #165db4;
+        }
+        .header .home-button {
+            background-color: #1877f2;
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .header .home-button:hover {
+            background-color: #165db4;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 20px;
+            display: flex;
+        }
+        .sidebar {
+            width: 250px;
+            margin-right: 20px;
+        }
+        .sidebar div {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .sidebar h2 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+            color: #1877f2;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar ul li {
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .sidebar ul li a {
+            color: #1877f2;
+            text-decoration: none;
+        }
+        .sidebar ul li a:hover {
+            text-decoration: underline;
+        }
+        .sidebar ul li button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .main-content {
+            flex: 1;
+        }
+        .post-form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .post-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: vertical;
+            font-size: 16px;
+        }
+        .post-form input[type="file"] {
+            margin-top: 10px;
+        }
+        .post-form button {
+            background-color: #1877f2;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .post-form button:hover {
+            background-color: #165db4;
+        }
+        .post {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .post h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #1877f2;
+        }
+        .post p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        .post .post-meta {
+            font-size: 14px;
+            color: #606770;
+        }
+        .post .file-preview {
+            margin-top: 10px;
+        }
+        .post .file-preview iframe {
+            width: 100%;
+            height: 500px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .comment-section {
+            margin-top: 20px;
+        }
+        .comment {
+            background-color: #f0f2f5;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .comment h4 {
+            margin: 0;
+            font-size: 14px;
+            color: #1877f2;
+        }
+        .comment p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        .comment-form {
+            margin-top: 10px;
+        }
+        .comment-form input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .comment-form button {
+            background-color: #1877f2;
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .comment-form button:hover {
+            background-color: #165db4;
+        }
+        .user-result {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .user-result h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #1877f2;
+        }
+        .user-result p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <!-- Left Section: Logo and Search Bar -->
+    <div class="left">
+        <h1>Social Network</h1>
+        <div class="search-panel">
+            <input type="text" id="searchInput" placeholder="Search topics or users...">
+            <button onclick="search()">Search</button>
+        </div>
+    </div>
+
+    <!-- Home Button -->
+    <button class="home-button" onclick="goHome()">Home</button>
+</div>
+
+<div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div>
+            <h2>Friends</h2>
+            <ul id="friendsList"></ul>
+        </div>
+        <div>
+            <h2>Friend Requests</h2>
+            <ul id="friendRequests"></ul>
+        </div>
+        <div>
+            <h2>Topics</h2>
+            <ul id="topicsList"></ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Post Form -->
+        <div class="post-form">
+            <form id="postForm" enctype="multipart/form-data">
+                <textarea name="content" placeholder="What's on your mind?" required></textarea>
+                <input type="file" name="file" accept=".pdf,.docx">
+                <input type="text" name="topic" placeholder="Add a topic (e.g., Math, Science)">
+                <button type="submit">Post</button>
+            </form>
+        </div>
+
+        <!-- Posts Feed -->
+        <div id="posts"></div>
+    </div>
+</div>
+
+<script>
+    // Fetch and display posts
+    function fetchPosts() {
+        fetch('get_posts.php')
+            .then(response => response.json())
+            .then(data => {
+                const postsContainer = document.getElementById('posts');
+                postsContainer.innerHTML = ''; // Clear existing posts
+                data.forEach(post => {
+                    const postDiv = document.createElement('div');
+                    postDiv.className = 'post';
+                    postDiv.innerHTML = `
+                        <h3>${post.username} (${post.status}) - ${post.is_friend ? '<a href="#" onclick="viewFriendPosts(\'' + post.username + '\')">Friend</a>' : 'Not Friend'}</h3>
+                        ${!post.is_friend ? `<button onclick="sendFriendRequest('${post.username}')">Send Friend Request</button>` : ''}
+                        <p>${post.content}</p>
+                        ${post.file_path ? `
+                            <div class="file-preview">
+                                ${post.file_path.endsWith('.pdf') ? `
+                                    <iframe src="${post.file_path}" frameborder="0"></iframe>
+                                ` : `
+                                    <iframe src="https://docs.google.com/gview?url=${encodeURIComponent(window.location.origin + '/' + post.file_path)}&embedded=true" frameborder="0"></iframe>
+                                `}
+                            </div>
+                        ` : ''}
+                        <div class="post-meta">Posted on ${new Date(post.post_date).toLocaleString()}</div>
+                        <div class="comment-section" id="comments-${post.id}">
+                            <h4>Comments:</h4>
+                            ${post.comments ? post.comments.map(comment => `
+                                <div class="comment">
+                                    <h4>${comment.username} (${comment.status})</h4>
+                                    <p>${comment.comment}</p>
+                                    <div class="post-meta">Commented on ${new Date(comment.comment_date).toLocaleString()}</div>
+                                </div>
+                            `).join('') : 'No comments yet.'}
+                        </div>
+                        <form class="comment-form" onsubmit="submitComment(event, ${post.id})">
+                            <input type="text" name="comment" placeholder="Write a comment..." required>
+                            <button type="submit">Comment</button>
+                        </form>
+                    `;
+                    postsContainer.appendChild(postDiv);
+                });
+            });
+    }
+
+    // Fetch and display friends
+    function fetchFriends() {
+        fetch('get_friends.php')
+            .then(response => response.json())
+            .then(data => {
+                const friendsList = document.getElementById('friendsList');
+                friendsList.innerHTML = ''; // Clear existing friends
+                data.forEach(friend => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<a href="#" onclick="viewFriendPosts('${friend.username}')">${friend.username}</a>`;
+                    friendsList.appendChild(li);
+                });
+            });
+    }
+
+    // Fetch and display friend requests
+    function fetchFriendRequests() {
+        fetch('get_friend_requests.php')
+            .then(response => response.json())
+            .then(data => {
+                const friendRequests = document.getElementById('friendRequests');
+                friendRequests.innerHTML = ''; // Clear existing requests
+                data.forEach(request => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        ${request.username}
+                        <button onclick="acceptFriendRequest('${request.username}')">✔️</button>
+                        <button onclick="rejectFriendRequest('${request.username}')">❌</button>
+                    `;
+                    friendRequests.appendChild(li);
+                });
+            });
+    }
+
+    // Fetch and display topics
+    function fetchTopics() {
+        fetch('get_topics.php')
+            .then(response => response.json())
+            .then(data => {
+                const topicsList = document.getElementById('topicsList');
+                topicsList.innerHTML = ''; // Clear existing topics
+                data.forEach(topic => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<a href="#" onclick="viewTopicPosts('${topic.topic}')">${topic.topic}</a>`;
+                    topicsList.appendChild(li);
+                });
+            });
+    }
+
+    // Handle post submission
+    document.getElementById('postForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+
+        fetch('post.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert(data);
+            fetchPosts(); // Refresh posts after submission
+        });
+    });
+
+    // Handle comment submission
+    function submitComment(event, postId) {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        formData.append('post_id', postId);
+
+        fetch('comment.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert(data);
+            fetchPosts(); // Refresh posts after submission
+        });
+    }
+
+    // Handle search
+    function search() {
+        const query = document.getElementById('searchInput').value;
+        fetch(`search.php?query=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(data => {
+                const postsContainer = document.getElementById('posts');
+                postsContainer.innerHTML = ''; // Clear existing posts
+                data.forEach(result => {
+                    if (result.type === 'user') {
+                        const userDiv = document.createElement('div');
+                        userDiv.className = 'user-result';
+                        userDiv.innerHTML = `
+                            <h3>${result.username} (${result.status}) - ${result.is_friend ? '<a href="#" onclick="viewFriendPosts(\'' + result.username + '\')">Friend</a>' : 'Not Friend'}</h3>
+                            ${result.is_friend ? `<a href="#" onclick="viewFriendPosts('${result.username}')">View Posts</a>` : ''}
+                        `;
+                        postsContainer.appendChild(userDiv);
+                    } else {
+                        const postDiv = document.createElement('div');
+                        postDiv.className = 'post';
+                        postDiv.innerHTML = `
+                            <h3>${result.username} (${result.status}) - ${result.is_friend ? '<a href="#" onclick="viewFriendPosts(\'' + result.username + '\')">Friend</a>' : 'Not Friend'}</h3>
+                            <p>${result.content}</p>
+                            ${result.file_path ? `
+                                <div class="file-preview">
+                                    ${result.file_path.endsWith('.pdf') ? `
+                                        <iframe src="${result.file_path}" frameborder="0"></iframe>
+                                    ` : `
+                                        <iframe src="https://docs.google.com/gview?url=${encodeURIComponent(window.location.origin + '/' + result.file_path)}&embedded=true" frameborder="0"></iframe>
+                                    `}
+                                </div>
+                            ` : ''}
+                            <div class="post-meta">Posted on ${new Date(result.post_date).toLocaleString()}</div>
+                            <div class="comment-section" id="comments-${result.id}">
+                                <h4>Comments:</h4>
+                                ${result.comments ? result.comments.map(comment => `
+                                    <div class="comment">
+                                        <h4>${comment.username} (${comment.status})</h4>
+                                        <p>${comment.comment}</p>
+                                        <div class="post-meta">Commented on ${new Date(comment.comment_date).toLocaleString()}</div>
+                                    </div>
+                                `).join('') : 'No comments yet.'}
+                            </div>
+                            <form class="comment-form" onsubmit="submitComment(event, ${result.id})">
+                                <input type="text" name="comment" placeholder="Write a comment..." required>
+                                <button type="submit">Comment</button>
+                            </form>
+                        `;
+                        postsContainer.appendChild(postDiv);
+                    }
+                });
+            });
+    }
+
+    // Send friend request
+    function sendFriendRequest(username) {
+        if (confirm(`Send friend request to ${username}?`)) {
+            fetch('send_friend_request.php', {
+                method: 'POST',
+                body: JSON.stringify({ username: username }),
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+                fetchPosts(); // Refresh posts
+                fetchFriendRequests(); // Refresh friend requests
+            });
+        }
+    }
+
+    // Accept friend request
+    function acceptFriendRequest(username) {
+        fetch('accept_friend_request.php', {
+            method: 'POST',
+            body: JSON.stringify({ username: username }),
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert(data);
+            fetchFriendRequests(); // Refresh friend requests
+            fetchFriends(); // Refresh friends list
+            fetchPosts(); // Refresh posts
+        });
+    }
+
+    // Reject friend request
+    function rejectFriendRequest(username) {
+        fetch('reject_friend_request.php', {
+            method: 'POST',
+            body: JSON.stringify({ username: username }),
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert(data);
+            fetchFriendRequests(); // Refresh friend requests
+        });
+    }
+
+    // Go home
+    function goHome() {
+        fetchPosts(); // Refresh posts feed
+    }
+
+    // Load posts, friends, friend requests, and topics on page load
+    fetchPosts();
+    fetchFriends();
+    fetchFriendRequests();
+    fetchTopics();
+</script>
+</body>
+</html>
